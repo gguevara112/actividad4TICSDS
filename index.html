@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>_guillermoguevara</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/2048px-Instagram_logo_2022.svg.png" type="image/png" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/jsx">
+      function Header() {
+        return (
+          <header style={styles.header}>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png"
+              alt="logo"
+              style={styles.logo}
+            />
+            <input type="text" placeholder="Search" style={styles.search} />
+            <div style={styles.buttons}>
+              <button style={styles.button}>Log In</button>
+              <button style={styles.button}>Sign Up</button>
+            </div>
+          </header>
+        );
+      }
+
+      function Profile() {
+        return (
+          <div style={styles.profileHeader}>
+            <img
+              className="profile-img"
+              src="https://i.pinimg.com/736x/29/61/21/2961217cc8ba89461bdc651d295b1275.jpg"
+              alt="foto de perfil"
+              style={styles.profileImg}
+            />
+            <div style={styles.profileInfo}>
+              <h2 style={styles.username}>_guillermoguevara</h2>
+              <div style={styles.profileStats}>
+                <span style={styles.profileStat}>
+                  <strong>0</strong> posts
+                </span>
+                <span style={styles.profileStat}>
+                  <strong>320</strong> followers
+                </span>
+                <span style={styles.profileStat}>
+                  <strong>229</strong> following
+                </span>
+              </div>
+              <p>Guillermo Guevara</p>
+              <LikeButton />
+            </div>
+          </div>
+        );
+      }
+
+      function LikeButton() {
+        const [likes, setLikes] = React.useState(0);
+        function handleLike() {
+          setLikes(likes + 1);
+        }
+        return (
+          <button onClick={handleLike} style={styles.button}>
+            {likes} {likes !== 1 ? "$    Propina" : "$    Propina"}
+          </button>
+        );
+      }
+
+      function PrivateAccountNotice() {
+        return (
+          <div style={styles.privateNotice}>
+            <p>Esta cuenta es privada. Inicia sesión para ver el perfil.</p>
+          </div>
+        );
+      }
+
+      const styles = {
+        body: {
+          fontFamily: "'Roboto', sans-serif",
+        },
+        header: {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "10px 200px",
+          borderBottom: "1px solid #ccc",
+        },
+        logo: {
+          height: "35px",
+        },
+        search: {
+          padding: "10px",
+          width: "30%",
+          borderRadius: "20px",
+          border: "0px solid #ccc",
+          backgroundColor: "#f6f6f6",
+        },
+        buttons: {
+          display: "flex",
+          gap: "10px",
+        },
+        button: {
+          backgroundColor: "#1DA1F2",
+          color: "white",
+          border: "none",
+          borderRadius: "20px",
+          padding: "5px 15px",
+          cursor: "pointer",
+        },
+        profileHeader: {
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "20px",
+          borderBottom: "1px solid #dbdbdb",
+        },
+        profileImg: {
+          width: "150px",
+          height: "150px",
+          borderRadius: "50%",
+          border: "1px solid #dbdbdb",
+          marginRight: "80px",
+        },
+        profileInfo: {
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          gap: "10px", /* Añadido más espacio entre los elementos */
+        },
+        username: {
+          fontSize: "24px",
+          margin: "0",
+        },
+        profileStats: {
+          display: "flex",
+          gap: "20px",
+          marginTop: "10px",
+        },
+        profileStat: {
+          fontSize: "16px",
+        },
+        privateNotice: {
+          textAlign: "center",
+          padding: "20px",
+          fontSize: "18px",
+          color: "#555",
+        },
+      };
+
+      function App() {
+        return (
+          <div style={styles.body}>
+            <Header />
+            <Profile />
+            <PrivateAccountNotice /> {/* Sección añadida */}
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("app"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
