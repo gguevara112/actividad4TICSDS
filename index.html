@@ -16,6 +16,9 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/jsx">
+      
+      // Componentes //////////////////////////////////////////////////////////////
+
       function Header() {
         return (
           <header style={styles.header}>
@@ -33,34 +36,36 @@
         );
       }
 
-      function Profile() {
+      function Profile({ username, posts, followers, following, fullName, profileImage }) {
         return (
           <div style={styles.profileHeader}>
             <img
               className="profile-img"
-              src="https://i.pinimg.com/736x/29/61/21/2961217cc8ba89461bdc651d295b1275.jpg"
+              src={profileImage}
               alt="foto de perfil"
               style={styles.profileImg}
             />
             <div style={styles.profileInfo}>
-              <h2 style={styles.username}>_guillermoguevara</h2>
+              <h2 style={styles.username}>{username}</h2>
               <div style={styles.profileStats}>
                 <span style={styles.profileStat}>
-                  <strong>0</strong> posts
+                  <strong>{posts}</strong> posts
                 </span>
                 <span style={styles.profileStat}>
-                  <strong>320</strong> followers
+                  <strong>{followers}</strong> followers
                 </span>
                 <span style={styles.profileStat}>
-                  <strong>229</strong> following
+                  <strong>{following}</strong> following
                 </span>
               </div>
-              <p>Guillermo Guevara</p>
+              <p>{fullName}</p>
               <LikeButton />
             </div>
           </div>
         );
       }
+
+      // uso de STATE: Componente dinamico ////////////////////////////////////
 
       function LikeButton() {
         const [likes, setLikes] = React.useState(0);
@@ -81,6 +86,27 @@
           </div>
         );
       }
+
+      // APP componente anidado //////////////////////////////////////////////////////////////
+
+      function App() {
+        return (
+          <div style={styles.body}>
+            <Header />
+            <Profile 
+              username="_guillermoguevara" 
+              posts={0} 
+              followers={320} 
+              following={229}
+              fullName="Guillermo Guevara"
+              profileImage="https://i.pinimg.com/736x/29/61/21/2961217cc8ba89461bdc651d295b1275.jpg"
+            />
+            <PrivateAccountNotice />
+          </div>
+        );
+      }
+
+      // CSS /////////////////////////////////////////////////////////////////
 
       const styles = {
         body: {
@@ -133,7 +159,7 @@
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
-          gap: "10px", /* Añadido más espacio entre los elementos */
+          gap: "10px",
         },
         username: {
           fontSize: "24px",
@@ -155,18 +181,12 @@
         },
       };
 
-      function App() {
-        return (
-          <div style={styles.body}>
-            <Header />
-            <Profile />
-            <PrivateAccountNotice /> {/* Sección añadida */}
-          </div>
-        );
-      }
+      // Uso de PROPS ///////////////////////////////////////////////////////////
 
       const root = ReactDOM.createRoot(document.getElementById("app"));
       root.render(<App />);
+      
     </script>
   </body>
 </html>
+
